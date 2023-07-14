@@ -33,7 +33,7 @@ router.patch(
 )
 
 router.delete(
-  '/:id',
+  '/delete-book/:id',
   // auth(ENUM_USER_ROLE.Seller),
   BookController.deleteBook
 )

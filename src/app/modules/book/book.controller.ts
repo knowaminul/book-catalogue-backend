@@ -9,7 +9,6 @@ import pick from '../../../shared/pick'
 
 const createBook = catchAsync(async (req: Request, res: Response) => {
   const { ...book } = req.body
-  console.log('bookData', book);
   const result = await BookService.createBook(book)
 
   sendResponse<IBook>(res, {

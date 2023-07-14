@@ -24,7 +24,8 @@ const getAllBooks = async (
     paginationHelpers.calculatePagination(paginationOptions)
 
   const andConditions = []
-
+  console.log('searchTerm', searchTerm);
+  console.log('filtersData', filtersData);
   if (searchTerm) {
     andConditions.push({
       $or: bookFilterableFields.map(field => ({

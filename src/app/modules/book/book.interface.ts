@@ -6,7 +6,7 @@ export type IBook = {
   image: string
   author: string
   genre: string
-  publicationDate: string
+  publicationYear: number
   quantity?: number
   userId?: string
 }

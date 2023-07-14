@@ -1,0 +1,95 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\.f51f1118ba84338373331a440972f175886d971a-audit.json",
+    "files": [
+        {
+            "date": 1686843679205,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-15-06-21-error.log",
+            "hash": "a3bfc9420dbf1cb70c6e5ad28fd801da4ad76c9acb2497be1d8e7110b83b5f24"
+        },
+        {
+            "date": 1686853632768,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-16-06-00-error.log",
+            "hash": "decc2c4754344518d680c38c562b7fe581d4d82878c4b32d6e179dc4bfd686ca"
+        },
+        {
+            "date": 1686856281821,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-16-06-01-error.log",
+            "hash": "37d3218f48f214fd767d428252b4be506f3b5f7bee67d81ac60fa1e63342763b"
+        },
+        {
+            "date": 1686928600758,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-16-06-21-error.log",
+            "hash": "0d780cfca000bf03d2ca91ea68a66c5b2ff9eac2cf5c6d6f1e3b0f8b2221bd64"
+        },
+        {
+            "date": 1686936169226,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-16-06-23-error.log",
+            "hash": "f41c7c6e4ab49ec35e14b7a8f92acbf591b566ed5add1f47e9af21aa095edc66"
+        },
+        {
+            "date": 1686938511932,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-17-06-00-error.log",
+            "hash": "70caa890348e0d1fe9713e7032de9b83496a1cc50ac3a8c2e69563cd133edc4a"
+        },
+        {
+            "date": 1686942251303,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-17-06-01-error.log",
+            "hash": "ac56e10d8908372cc257098ef1fd08e180c647269c61478094199b872d5858a3"
+        },
+        {
+            "date": 1686945604910,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-17-06-02-error.log",
+            "hash": "524d1d86dc2d0812c6241cba280ba99f61a5af2d5e0459269b6f052abce3480c"
+        },
+        {
+            "date": 1686953457086,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-17-06-04-error.log",
+            "hash": "00c9c2759a5753e4477f54c0ae4f1f1178b970cce73777a1192689dfd085f48d"
+        },
+        {
+            "date": 1686975792230,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-17-06-10-error.log",
+            "hash": "275188602f39367e3ce276cbb1f3ec808156fe0ae8fc8b4f9bb9e4005ecfc4ec"
+        },
+        {
+            "date": 1686978823767,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-17-06-11-error.log",
+            "hash": "1cceff28b3951cbe5beefbde2740894b4e7461af4c4d435d97b82e35ce478fbd"
+        },
+        {
+            "date": 1687007944435,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-17-06-19-error.log",
+            "hash": "1a2d3de493774c48dfbd93a4bbdfc714a6c924da687e1f3addedaa5dca7e0ccb"
+        },
+        {
+            "date": 1687010738165,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-17-06-20-error.log",
+            "hash": "4776a8f06266ff5432750d1ffbdaa4e9862e19ce04d2bac48518b2e8c59842f4"
+        },
+        {
+            "date": 1687016381894,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-17-06-21-error.log",
+            "hash": "5cced2bd59806b9b221cc70c570b97d9917aa5289c2aaf609aa077797190832f"
+        },
+        {
+            "date": 1687068332400,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-18-06-12-error.log",
+            "hash": "74d27638f63a4eea70d4ed8f608e9f925733674804365164d6ba4a1818a1053d"
+        },
+        {
+            "date": 1687072145974,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-18-06-13-error.log",
+            "hash": "f2f9501b38064b0496d3b76f086381b05ab3e45bf7dbd74615019e2a293ed38c"
+        },
+        {
+            "date": 1687078991794,
+            "name": "G:\\Next Level Web Development\\Assigment\\assignment_3\\logs\\winston\\errors\\phu-2023-18-06-15-error.log",
+            "hash": "da8235b2e27fae78590c0aa05e644133d0f07f643552e6ddb78ee4f1d9ff5aba"
+        }
+    ],
+    "hashType": "sha256"
+}

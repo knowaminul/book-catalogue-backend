@@ -36,7 +36,7 @@ const getAllBooks = async (
   const { searchTerm, ...filtersData } = filters
 
   const andConditions = []
-  console.log('searchTermFromService', searchTerm)
+
   if (searchTerm) {
     andConditions.push({
       $or: bookFilterableFields.map(field => ({

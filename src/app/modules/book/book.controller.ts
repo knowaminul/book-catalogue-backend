@@ -34,15 +34,6 @@ const getRecentlyAddedBooks = catchAsync(
 )
 
 const getAllBooks = catchAsync(async (req: Request, res: Response) => {
-  const keyword = req.query.keyword
-    ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: 'i',
-        },
-      }
-    : {}
-  console.log('keyword', keyword)
   const filters = pick(req.query, bookFilterableFields)
   const result = await BookService.getAllBooks(filters)
 

@@ -4,11 +4,10 @@ import catchAsync from '../../../shared/catchAsync'
 import sendResponse from '../../../shared/sendResponse'
 import { IBook } from './book.interface'
 import BookService from './book.service'
-import { bookFilterableFields, bookPaginationFields } from './book.constant'
+import { bookFilterableFields } from './book.constant'
 import pick from '../../../shared/pick'
 
 const createBook = async (req: Request, res: Response) => {
-  
   const { ...book } = req.body
 
   const result = await BookService.createBook(book)
@@ -35,16 +34,22 @@ const getRecentlyAddedBooks = catchAsync(
 )
 
 const getAllBooks = catchAsync(async (req: Request, res: Response) => {
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {}
+  console.log('keyword', keyword)
   const filters = pick(req.query, bookFilterableFields)
-  const paginationOptions = pick(req.query, bookPaginationFields)
-
-  const result = await BookService.getAllBooks(filters, paginationOptions)
+  const result = await BookService.getAllBooks(filters)
 
   sendResponse<IBook[]>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Books retrieved successfully',
-    meta: result.meta,
     data: result.data,
   })
 })

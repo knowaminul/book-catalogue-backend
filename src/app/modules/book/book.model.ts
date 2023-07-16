@@ -27,7 +27,7 @@ const bookSchema = new Schema<IBook>(
       type: Number,
       required: false,
     },
-    userId: {
+    user: {
       type: String,
       required: true,
     },

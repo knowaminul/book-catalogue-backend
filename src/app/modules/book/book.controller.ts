@@ -7,8 +7,10 @@ import BookService from './book.service'
 import { bookFilterableFields, bookPaginationFields } from './book.constant'
 import pick from '../../../shared/pick'
 
-const createBook = catchAsync(async (req: Request, res: Response) => {
+const createBook = async (req: Request, res: Response) => {
+  
   const { ...book } = req.body
+
   const result = await BookService.createBook(book)
 
   sendResponse<IBook>(res, {
@@ -17,7 +19,20 @@ const createBook = catchAsync(async (req: Request, res: Response) => {
     message: 'Book created successfully',
     data: result,
   })
-})
+}
+
+const getRecentlyAddedBooks = catchAsync(
+  async (req: Request, res: Response) => {
+    const result = await BookService.getRecentlyAddedBooks()
+
+    sendResponse<IBook[]>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Recently added books retrieved successfully',
+      data: result.data,
+    })
+  }
+)
 
 const getAllBooks = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, bookFilterableFields)
@@ -48,9 +63,11 @@ const getSingleBook = catchAsync(async (req: Request, res: Response) => {
 })
 
 const updateBook = catchAsync(async (req: Request, res: Response) => {
+  console.log('updateBook controller is called')
   const id = req.params.id
   const updatedData = req.body
-
+  console.log('id', id)
+  console.log('updatedData', updatedData)
   const result = await BookService.updateBook(id, updatedData)
 
   sendResponse<IBook>(res, {
@@ -74,10 +91,44 @@ const deleteBook = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const addReviewToBook = async (req: Request, res: Response) => {
+  const productId = req.params.id
+  const review = req.body.review
+
+  console.log('productId', productId)
+  console.log('review', review)
+
+  const success = await BookService.addReviewToBook(productId, review)
+
+  if (!success) {
+    console.error('Book not found or review not added')
+    res.json({ error: 'Book not found or review not added' })
+    return
+  }
+
+  console.log('Review added successfully')
+  res.json({ message: 'Review added successfully' })
+}
+
+// const getReviewFromBook = async (req: Request, res: Response) => {
+//   const productId = req.params.id
+
+//   const result = await BookService.getReviewFromBook(productId)
+
+//   if (result) {
+//     res.json(result)
+//   } else {
+//     res.status(404).json({ error: 'Book not found' })
+//   }
+// }
+
 export const BookController = {
   createBook,
+  getRecentlyAddedBooks,
   getAllBooks,
   getSingleBook,
   updateBook,
   deleteBook,
+  addReviewToBook,
+  // getReviewFromBook,
 }

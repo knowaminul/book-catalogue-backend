@@ -5,8 +5,10 @@ import { IPaginationOptions } from '../../../interfaces/pagination'
 import { bookFilterableFields } from './book.constant'
 import { IBook, IBookFilters } from './book.interface'
 import { Book } from './book.model'
+import { ObjectId } from 'mongodb'
 
 const createBook = async (book: IBook): Promise<IBook | null> => {
+  console.log('book-service', book)
   const createdBook = await Book.create(book)
 
   if (!createBook) {
@@ -14,6 +16,25 @@ const createBook = async (book: IBook): Promise<IBook | null> => {
   }
   return createdBook
 }
+
+const getRecentlyAddedBooks = async (): Promise<IGenericResponse<IBook[]>> => {
+  const result = await Book.find({})
+    .sort({ createdAt: -1 }) // Sort by createdAt field in descending order
+    .limit(10) // Retrieve only the last ten books
+    .exec()
+
+  const count = await Book.countDocuments()
+
+  return {
+    meta: {
+      page: 1, // Since there is no pagination, set page to 1
+      limit: 10,
+      count,
+    },
+    data: result,
+  }
+}
+
 
 const getAllBooks = async (
   filters: IBookFilters,
@@ -24,8 +45,8 @@ const getAllBooks = async (
     paginationHelpers.calculatePagination(paginationOptions)
 
   const andConditions = []
-  console.log('searchTerm', searchTerm);
-  console.log('filtersData', filtersData);
+  console.log('searchTerm', searchTerm)
+  console.log('filtersData', filtersData)
   if (searchTerm) {
     andConditions.push({
       $or: bookFilterableFields.map(field => ({
@@ -90,10 +111,44 @@ const deleteBook = async (id: string): Promise<IBook | null> => {
   return result
 }
 
+const addReviewToBook = async (
+  productId: string,
+  review: string
+): Promise<boolean> => {
+  console.log('review', review)
+  const result = await Book.updateOne(
+    { _id: new ObjectId(productId) },
+    { $push: { reviews: review } }
+  )
+
+  return result.modifiedCount === 1
+}
+
+// const getReviewFromBook = async (productId: string): Promise<object | null> => {
+//   const result = await Book.findOne(
+//     { _id: new ObjectId(productId) },
+//     { projection: { _id: 0, reviews: 1 } }
+//   )
+
+//   return result
+// }
+
+// const getReviewFromBook = async (productId: string): Promise<object | null> => {
+//   const result = await Book.findOne(
+//     { _id: new ObjectId(productId) },
+//     { projection: { reviews: 1, _id: 0 } } // Exclude _id field instead of including reviews field
+//   )
+
+//   return result
+// }
+
 export default {
   createBook,
+  getRecentlyAddedBooks,
   getAllBooks,
   getSingleBook,
   updateBook,
   deleteBook,
+  addReviewToBook,
+  // getReviewFromBook,
 }

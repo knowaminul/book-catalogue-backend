@@ -17,7 +17,7 @@ const createBookZodSchema = z.object({
     publicationYear: z.number({
       required_error: 'Publication year is required',
     }),
-    userId: z.string({
+    user: z.string({
       required_error: 'User is required',
     }),
   }),
@@ -40,7 +40,7 @@ const updateBookZodSchema = z.object({
     publicationYear: z.number({
       required_error: 'Publication year is required',
     }),
-    userId: z.string({
+    user: z.string({
       required_error: 'User is required',
     }),
   }),

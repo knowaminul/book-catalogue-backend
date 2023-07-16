@@ -1,15 +1,21 @@
 import { Model } from 'mongoose'
 
+export type IReview = {
+  review: string
+}
+
 export type IBook = {
-  _id: number
+  _id?: number
   title: string
   image: string
   author: string
   genre: string
   publicationYear: number
   quantity?: number
-  userId?: string
+  user?: string
+  reviews?: IReview[]
 }
+
 
 export type IBookFilters = {
   searchTerm?: string

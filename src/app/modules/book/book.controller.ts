@@ -6,8 +6,10 @@ import { IBook } from './book.interface'
 import BookService from './book.service'
 import { bookFilterableFields } from './book.constant'
 import pick from '../../../shared/pick'
+import { Book } from './book.model'
+import { ObjectId } from 'mongodb'
 
-const createBook = async (req: Request, res: Response) => {
+const createBook = catchAsync(async (req: Request, res: Response) => {
   const { ...book } = req.body
 
   const result = await BookService.createBook(book)
@@ -18,7 +20,7 @@ const createBook = async (req: Request, res: Response) => {
     message: 'Book created successfully',
     data: result,
   })
-}
+})
 
 const getRecentlyAddedBooks = catchAsync(
   async (req: Request, res: Response) => {
@@ -87,25 +89,6 @@ const deleteBook = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
-const addReviewToBook = async (req: Request, res: Response) => {
-  const productId = req.params.id
-  const review = req.body.review
-
-  console.log('productId', productId)
-  console.log('review', review)
-
-  const success = await BookService.addReviewToBook(productId, review)
-
-  if (!success) {
-    console.error('Book not found or review not added')
-    res.json({ error: 'Book not found or review not added' })
-    return
-  }
-
-  console.log('Review added successfully')
-  res.json({ message: 'Review added successfully' })
-}
-
 const getSearchResult = catchAsync(async (req: Request, res: Response) => {
   const { keyword } = req.query
   if (!keyword) {
@@ -128,6 +111,68 @@ const getSearchResult = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+// const addReviewToBook = async (
+//   req: Request,
+//   res: Response
+// ): Promise<void> => {
+//   try {
+//     const productId = req.params.id
+//     const { review } = req.body
+
+//     console.log('Review received:', review)
+
+//     const result = await Book.updateOne(
+//       { _id: new ObjectId(productId) },
+//       { $push: { reviews: review } }
+//     )
+
+//     console.log('Update result:', result)
+
+//     if (result.modifiedCount === 1) {
+//       console.log('Review added successfully')
+//       res.json({ message: 'Review added successfully' })
+//     } else {
+//       console.error('Book not found or review not added')
+//       res.status(400).json({ error: 'Book not found or review not added' })
+//     }
+//   } catch (error) {
+//     console.error('An error occurred while adding the review:', error)
+//     res.status(500).json({ error: 'Internal server error' })
+//   }
+// }
+
+const addReviewToBook = catchAsync(async (req: Request, res: Response) => {
+  const productId = req.params.id
+  const review = req.body.data.review
+
+  const result = await Book.updateOne(
+    { _id: new ObjectId(productId) },
+    { $push: { reviews: review } }
+  )
+
+  if (result.modifiedCount !== 1) {
+    console.error('Product not found or review not added')
+    res.json({ error: 'Product not found or review not added' })
+    return
+  }
+
+  console.log('Review added successfully')
+  res.json({ message: 'Review added successfully' })
+})
+
+const getReviewFromBook = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id
+
+  const result = await BookService.getReviewFromBook(id)
+
+  sendResponse<IBook>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Reviews retrieved successfully',
+    data: result,
+  })
+})
+
 export const BookController = {
   createBook,
   getRecentlyAddedBooks,
@@ -136,5 +181,6 @@ export const BookController = {
   updateBook,
   deleteBook,
   addReviewToBook,
+  getReviewFromBook,
   getSearchResult,
 }

@@ -2,10 +2,8 @@ import { IGenericResponse } from '../../../interfaces/common'
 import { bookFilterableFields } from './book.constant'
 import { IBook, IBookFilters } from './book.interface'
 import { Book } from './book.model'
-import { ObjectId } from 'mongodb'
 
 const createBook = async (book: IBook): Promise<IBook | null> => {
-  console.log('book-service', book)
   const createdBook = await Book.create(book)
 
   if (!createBook) {
@@ -87,19 +85,6 @@ const deleteBook = async (id: string): Promise<IBook | null> => {
   return result
 }
 
-const addReviewToBook = async (
-  productId: string,
-  review: string
-): Promise<boolean> => {
-  console.log('review', review)
-  const result = await Book.updateOne(
-    { _id: new ObjectId(productId) },
-    { $push: { reviews: review } }
-  )
-
-  return result.modifiedCount === 1
-}
-
 const getSearchResult = async (keyword: string): Promise<IBook[]> => {
   const result = await Book.find({
     $or: bookFilterableFields.map(field => ({
@@ -112,6 +97,11 @@ const getSearchResult = async (keyword: string): Promise<IBook[]> => {
   return result
 }
 
+const getReviewFromBook = async (id: string): Promise<IBook | null> => {
+  const result = await Book.findById(id)
+  return result
+}
+
 export default {
   createBook,
   getRecentlyAddedBooks,
@@ -119,6 +109,6 @@ export default {
   getSingleBook,
   updateBook,
   deleteBook,
-  addReviewToBook,
+  getReviewFromBook,
   getSearchResult,
 }

@@ -31,6 +31,10 @@ const bookSchema = new Schema<IBook>(
       type: String,
       required: true,
     },
+    reviews: {
+      type: Array,
+      required: false,
+    }
   },
   {
     timestamps: true,

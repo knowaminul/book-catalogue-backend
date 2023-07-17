@@ -24,8 +24,11 @@ router.patch(
 
 router.delete('/delete-book/:id', BookController.deleteBook)
 
+router.get('/books/search', BookController.getSearchResult)
+
 router.post('/review/:id', BookController.addReviewToBook)
 
-router.get('/books/search', BookController.getSearchResult)
+router.get('/review/:id', BookController.getReviewFromBook)
+
 
 export const BookRoutes = router

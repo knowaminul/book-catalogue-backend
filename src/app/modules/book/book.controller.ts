@@ -111,36 +111,6 @@ const getSearchResult = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
-// const addReviewToBook = async (
-//   req: Request,
-//   res: Response
-// ): Promise<void> => {
-//   try {
-//     const productId = req.params.id
-//     const { review } = req.body
-
-//     console.log('Review received:', review)
-
-//     const result = await Book.updateOne(
-//       { _id: new ObjectId(productId) },
-//       { $push: { reviews: review } }
-//     )
-
-//     console.log('Update result:', result)
-
-//     if (result.modifiedCount === 1) {
-//       console.log('Review added successfully')
-//       res.json({ message: 'Review added successfully' })
-//     } else {
-//       console.error('Book not found or review not added')
-//       res.status(400).json({ error: 'Book not found or review not added' })
-//     }
-//   } catch (error) {
-//     console.error('An error occurred while adding the review:', error)
-//     res.status(500).json({ error: 'Internal server error' })
-//   }
-// }
-
 const addReviewToBook = catchAsync(async (req: Request, res: Response) => {
   const productId = req.params.id
   const review = req.body.data.review

@@ -106,17 +106,27 @@ const addReviewToBook = async (req: Request, res: Response) => {
   res.json({ message: 'Review added successfully' })
 }
 
-// const getReviewFromBook = async (req: Request, res: Response) => {
-//   const productId = req.params.id
+const getSearchResult = catchAsync(async (req: Request, res: Response) => {
+  const { keyword } = req.query
+  if (!keyword) {
+    sendResponse<IBook[]>(res, {
+      statusCode: httpStatus.BAD_REQUEST,
+      success: false,
+      message: 'Search term is required',
+      data: [],
+    })
+    return
+  }
 
-//   const result = await BookService.getReviewFromBook(productId)
+  const result = await BookService.getSearchResult(keyword as string)
 
-//   if (result) {
-//     res.json(result)
-//   } else {
-//     res.status(404).json({ error: 'Book not found' })
-//   }
-// }
+  sendResponse<IBook[]>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Search result retrieved successfully',
+    data: result,
+  })
+})
 
 export const BookController = {
   createBook,
@@ -126,5 +136,5 @@ export const BookController = {
   updateBook,
   deleteBook,
   addReviewToBook,
-  // getReviewFromBook,
+  getSearchResult,
 }

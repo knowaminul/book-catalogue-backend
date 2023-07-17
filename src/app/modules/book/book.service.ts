@@ -1,7 +1,4 @@
-// import { SortOrder } from 'mongoose'
-// import { paginationHelpers } from '../../../helpers/paginationHelper'
 import { IGenericResponse } from '../../../interfaces/common'
-// import { IPaginationOptions } from '../../../interfaces/pagination'
 import { bookFilterableFields } from './book.constant'
 import { IBook, IBookFilters } from './book.interface'
 import { Book } from './book.model'
@@ -56,7 +53,10 @@ const getAllBooks = async (
     })
   }
 
-  const result = await Book.find({}).exec()
+  const whereConditions =
+    andConditions.length > 0 ? { $and: andConditions } : {}
+
+  const result = await Book.find(whereConditions)
   const count = await Book.countDocuments()
 
   return {
@@ -100,6 +100,18 @@ const addReviewToBook = async (
   return result.modifiedCount === 1
 }
 
+const getSearchResult = async (keyword: string): Promise<IBook[]> => {
+  const result = await Book.find({
+    $or: bookFilterableFields.map(field => ({
+      [field]: {
+        $regex: keyword,
+        $options: 'i',
+      },
+    })),
+  })
+  return result
+}
+
 export default {
   createBook,
   getRecentlyAddedBooks,
@@ -108,4 +120,5 @@ export default {
   updateBook,
   deleteBook,
   addReviewToBook,
+  getSearchResult,
 }

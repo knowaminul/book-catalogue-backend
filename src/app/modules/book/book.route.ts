@@ -26,6 +26,6 @@ router.delete('/delete-book/:id', BookController.deleteBook)
 
 router.post('/review/:id', BookController.addReviewToBook)
 
-// router.get('/review/:id', BookController.getReviewFromBook)
+router.get('/books/search', BookController.getSearchResult)
 
 export const BookRoutes = router
